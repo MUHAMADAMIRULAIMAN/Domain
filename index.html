@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -566,8 +567,8 @@
     ============================================================ */
     #about .about-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
+      grid-template-columns: 1fr 1fr 280px;
+      gap: 3rem;
       align-items: start;
     }
 
@@ -617,6 +618,89 @@
       color: var(--text-muted);
       letter-spacing: 0.04em;
       text-transform: uppercase;
+    }
+
+    /* Photo card */
+    .about-photo-card {
+      background: var(--bg-raised);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      position: relative;
+      transition: border-color var(--transition), box-shadow var(--transition),
+                  transform var(--transition);
+    }
+
+    .about-photo-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 8px 40px var(--accent-glow), 0 0 0 1px var(--accent-glow);
+      transform: translateY(-4px);
+    }
+
+    /* Blue gradient overlay at the bottom */
+    .about-photo-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 45%;
+      background: linear-gradient(to top, rgba(7,13,26,0.95) 0%, transparent 100%);
+      pointer-events: none;
+    }
+
+    .about-photo-card img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      filter: grayscale(15%) contrast(1.05);
+      transition: filter var(--transition), transform 500ms ease;
+    }
+
+    .about-photo-card:hover img {
+      filter: grayscale(0%) contrast(1.08);
+      transform: scale(1.03);
+    }
+
+    /* Caption overlaid on the gradient */
+    .about-photo-caption {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      z-index: 2;
+      padding: 1.25rem 1.25rem 1.1rem;
+    }
+
+    .about-photo-caption .caption-name {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.2rem;
+    }
+
+    .about-photo-caption .caption-role {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--accent-bright);
+      font-weight: 500;
+      letter-spacing: 0.04em;
+    }
+
+    /* Top-right accent badge */
+    .about-photo-badge {
+      position: absolute;
+      top: 0.85rem;
+      right: 0.85rem;
+      z-index: 3;
+      background: var(--accent-glow);
+      border: 1px solid rgba(59,79,232,0.4);
+      border-radius: 99px;
+      padding: 0.22rem 0.7rem;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: var(--accent-bright);
+      letter-spacing: 0.06em;
+      backdrop-filter: blur(8px);
     }
 
     /* ============================================================
@@ -1102,7 +1186,8 @@
        RESPONSIVE
     ============================================================ */
     @media (max-width: 900px) {
-      #about .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      #about .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .about-photo-card { max-height: 280px; overflow: hidden; }
       .about-stats { flex-direction: row; flex-wrap: wrap; }
       .stat-card { flex: 1 1 160px; }
       #experience .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
@@ -1264,6 +1349,20 @@
           <div class="stat-card reveal-scale" style="transition-delay: 360ms;">
             <div class="stat-value">Full‑Stack</div>
             <div class="stat-label">Python · Java · PHP · SQL · JS</div>
+          </div>
+        </div>
+
+        <!-- Photo card -->
+        <div class="about-photo-card reveal" style="transition-delay: 200ms;">
+          <span class="about-photo-badge">FYP · AutoVision</span>
+          <img
+            src="avatar.jpeg"
+            alt="Muhamad Amirul Aiman presenting AutoVision Final Year Project to panel"
+            loading="lazy"
+          />
+          <div class="about-photo-caption">
+            <div class="caption-name">Muhamad Amirul Aiman</div>
+            <div class="caption-role">Software Engineer · UTHM 2026</div>
           </div>
         </div>
 
